@@ -1,0 +1,104 @@
+// C++ code
+//
+/*
+  This program blinks pin 13 of the Arduino (the
+  built-in LED)
+*/
+
+//pin for the push button
+const int buttonPin = 7;
+
+//variable to track button state
+int buttonSt = 0;
+int lastButtonSt = 0;
+
+
+void setup()
+{
+  pinMode(LED_BUILTIN, OUTPUT);
+  pinMode(buttonPin, INPUT);
+}
+
+void dot()
+{// turn the LED on (HIGH is the voltage level)
+  digitalWrite(LED_BUILTIN, HIGH);
+  delay(500); // Wait for 1000 millisecond(s)
+  // turn the LED off by making the voltage LOW
+  digitalWrite(LED_BUILTIN, LOW);
+  delay(500); // Wait for 1000 millisecond(s)
+}
+
+void dash()
+{
+  // turn the LED on (HIGH is the voltage level)
+  digitalWrite(LED_BUILTIN, HIGH);
+  delay(1500); // Wait for 1000 millisecond(s)
+  // turn the LED off by making the voltage LOW
+  digitalWrite(LED_BUILTIN, LOW);
+  delay(1500); // Wait for 1000 millisecond(s)
+}
+
+void W()
+{
+  dot();
+  dash();
+  dash();
+}
+
+void A()
+{
+  dot();
+  dash();
+
+}
+
+void H()
+{
+  dot();
+  dot();
+  dot();
+  dot();
+}
+
+void I()
+{
+  dot();
+  dot();
+ }
+
+void D()
+{
+  dash();
+  dot();
+  dot();
+  
+}
+  
+
+void loop()
+{
+  //Read the state of the push button
+  buttonSt = digitalRead(buttonPin);
+  
+  
+  //check if button is pressed 
+  if (buttonSt ==HIGH && lastButtonSt == LOW)
+  {
+    
+    //Button is pressed, reset sequence
+    lastButtonSt = HIGH;
+    delay(50);
+    
+  	W();
+  	A();
+  	H();
+  	I();
+  	D();
+    
+  }
+  else if (buttonSt ==LOW && lastButtonSt == HIGH)
+  {
+    //Button released
+    lastButtonSt = LOW;
+  }
+}
